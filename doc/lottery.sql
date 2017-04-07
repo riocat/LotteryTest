@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : myDataBase
-Source Server Version : 50548
+Source Server         : Mysql
+Source Server Version : 50527
 Source Host           : localhost:3306
 Source Database       : lottery
 
 Target Server Type    : MYSQL
-Target Server Version : 50548
+Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2016-08-03 12:15:47
+Date: 2017-04-07 11:01:58
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@ CREATE TABLE `lottery` (
   `ball7` int(2) DEFAULT NULL,
   `result_string` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1411 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1513 DEFAULT CHARSET=utf8 COMMENT='超级大乐透结果表';
 
 -- ----------------------------
 -- Records of lottery
@@ -1446,3 +1446,210 @@ INSERT INTO `lottery` VALUES ('1407', '16086', '3', '5', '22', '25', '30', '7', 
 INSERT INTO `lottery` VALUES ('1408', '16087', '3', '16', '17', '23', '25', '7', '9', '03161723250709');
 INSERT INTO `lottery` VALUES ('1409', '16088', '4', '6', '17', '21', '30', '6', '11', '04061721300611');
 INSERT INTO `lottery` VALUES ('1410', '16089', '7', '14', '17', '28', '34', '7', '10', '07141728340710');
+INSERT INTO `lottery` VALUES ('1411', '16090', '4', '6', '8', '28', '32', '7', '12', '04060828320712');
+INSERT INTO `lottery` VALUES ('1412', '16091', '8', '13', '17', '21', '22', '2', '8', '08131721220208');
+INSERT INTO `lottery` VALUES ('1413', '16092', '2', '13', '31', '33', '34', '7', '11', '02133133340711');
+INSERT INTO `lottery` VALUES ('1414', '16093', '1', '8', '14', '30', '35', '6', '7', '01081430350607');
+INSERT INTO `lottery` VALUES ('1415', '16094', '1', '14', '16', '17', '18', '5', '7', '01141617180507');
+INSERT INTO `lottery` VALUES ('1416', '16095', '8', '12', '18', '19', '21', '3', '6', '08121819210306');
+INSERT INTO `lottery` VALUES ('1417', '16096', '1', '6', '8', '12', '21', '5', '10', '01060812210510');
+INSERT INTO `lottery` VALUES ('1418', '16097', '6', '8', '18', '31', '33', '10', '12', '06081831331012');
+INSERT INTO `lottery` VALUES ('1419', '16098', '8', '9', '11', '20', '29', '4', '5', '08091120290405');
+INSERT INTO `lottery` VALUES ('1420', '16099', '3', '4', '12', '14', '27', '1', '5', '03041214270105');
+INSERT INTO `lottery` VALUES ('1421', '16100', '8', '12', '19', '26', '30', '2', '12', '08121926300212');
+INSERT INTO `lottery` VALUES ('1422', '16101', '4', '6', '28', '33', '35', '7', '12', '04062833350712');
+INSERT INTO `lottery` VALUES ('1423', '16102', '3', '5', '6', '34', '35', '3', '12', '03050634350312');
+INSERT INTO `lottery` VALUES ('1424', '16103', '5', '14', '20', '23', '29', '3', '11', '05142023290311');
+INSERT INTO `lottery` VALUES ('1425', '16104', '1', '20', '22', '23', '30', '6', '7', '01202223300607');
+INSERT INTO `lottery` VALUES ('1426', '16105', '8', '11', '31', '34', '35', '1', '2', '08113134350102');
+INSERT INTO `lottery` VALUES ('1427', '16106', '3', '21', '30', '33', '35', '1', '4', '03213033350104');
+INSERT INTO `lottery` VALUES ('1428', '16107', '2', '6', '19', '24', '26', '4', '6', '02061924260406');
+INSERT INTO `lottery` VALUES ('1429', '16108', '10', '17', '22', '23', '25', '7', '9', '10172223250709');
+INSERT INTO `lottery` VALUES ('1430', '16109', '3', '25', '28', '31', '34', '11', '12', '03252831341112');
+INSERT INTO `lottery` VALUES ('1431', '16110', '7', '20', '21', '23', '30', '7', '10', '07202123300710');
+INSERT INTO `lottery` VALUES ('1432', '16111', '4', '9', '22', '26', '27', '2', '12', '04092226270212');
+INSERT INTO `lottery` VALUES ('1433', '16112', '7', '22', '23', '31', '32', '4', '5', '07222331320405');
+INSERT INTO `lottery` VALUES ('1434', '16113', '10', '11', '17', '30', '34', '3', '12', '10111730340312');
+INSERT INTO `lottery` VALUES ('1435', '16114', '16', '17', '20', '32', '33', '3', '7', '16172032330307');
+INSERT INTO `lottery` VALUES ('1436', '16115', '1', '4', '15', '31', '34', '2', '11', '01041531340211');
+INSERT INTO `lottery` VALUES ('1437', '16116', '4', '6', '8', '19', '34', '10', '12', '04060819341012');
+INSERT INTO `lottery` VALUES ('1438', '16117', '3', '9', '14', '16', '23', '2', '9', '03091416230209');
+INSERT INTO `lottery` VALUES ('1439', '16118', '12', '15', '18', '24', '29', '3', '11', '12151824290311');
+INSERT INTO `lottery` VALUES ('1440', '16119', '2', '3', '9', '21', '22', '5', '10', '02030921220510');
+INSERT INTO `lottery` VALUES ('1441', '16120', '3', '10', '20', '32', '34', '4', '7', '03102032340407');
+INSERT INTO `lottery` VALUES ('1442', '16121', '4', '5', '8', '15', '20', '1', '6', '04050815200106');
+INSERT INTO `lottery` VALUES ('1443', '16122', '1', '3', '12', '14', '29', '2', '6', '01031214290206');
+INSERT INTO `lottery` VALUES ('1444', '16123', '4', '5', '13', '20', '32', '1', '10', '04051320320110');
+INSERT INTO `lottery` VALUES ('1445', '16124', '4', '13', '24', '26', '29', '8', '11', '04132426290811');
+INSERT INTO `lottery` VALUES ('1446', '16125', '6', '7', '8', '28', '30', '1', '2', '06070828300102');
+INSERT INTO `lottery` VALUES ('1447', '16126', '11', '13', '16', '19', '24', '6', '8', '11131619240608');
+INSERT INTO `lottery` VALUES ('1448', '16127', '1', '5', '15', '24', '26', '9', '10', '01051524260910');
+INSERT INTO `lottery` VALUES ('1449', '16128', '17', '20', '22', '30', '33', '7', '8', '17202230330708');
+INSERT INTO `lottery` VALUES ('1450', '16129', '7', '8', '19', '30', '35', '8', '9', '07081930350809');
+INSERT INTO `lottery` VALUES ('1451', '16130', '11', '23', '32', '33', '34', '1', '12', '11233233340112');
+INSERT INTO `lottery` VALUES ('1452', '16131', '6', '13', '25', '28', '30', '2', '7', '06132528300207');
+INSERT INTO `lottery` VALUES ('1453', '16132', '4', '18', '19', '22', '35', '1', '2', '04181922350102');
+INSERT INTO `lottery` VALUES ('1454', '16133', '1', '4', '5', '23', '28', '5', '9', '01040523280509');
+INSERT INTO `lottery` VALUES ('1455', '16134', '1', '3', '31', '32', '34', '2', '7', '01033132340207');
+INSERT INTO `lottery` VALUES ('1456', '16135', '1', '10', '12', '18', '35', '1', '12', '01101218350112');
+INSERT INTO `lottery` VALUES ('1457', '16136', '5', '6', '7', '19', '23', '4', '11', '05060719230411');
+INSERT INTO `lottery` VALUES ('1458', '16137', '7', '20', '23', '29', '34', '2', '10', '07202329340210');
+INSERT INTO `lottery` VALUES ('1459', '16138', '12', '13', '16', '29', '35', '5', '11', '12131629350511');
+INSERT INTO `lottery` VALUES ('1460', '16139', '13', '21', '30', '31', '35', '1', '8', '13213031350108');
+INSERT INTO `lottery` VALUES ('1461', '16140', '12', '16', '23', '29', '34', '4', '11', '12162329340411');
+INSERT INTO `lottery` VALUES ('1462', '16141', '2', '6', '7', '19', '28', '11', '12', '02060719281112');
+INSERT INTO `lottery` VALUES ('1463', '16142', '1', '6', '17', '23', '26', '6', '12', '01061723260612');
+INSERT INTO `lottery` VALUES ('1464', '16143', '4', '6', '22', '27', '31', '6', '7', '04062227310607');
+INSERT INTO `lottery` VALUES ('1465', '16144', '4', '5', '13', '22', '31', '5', '10', '04051322310510');
+INSERT INTO `lottery` VALUES ('1466', '16145', '1', '9', '11', '17', '28', '3', '8', '01091117280308');
+INSERT INTO `lottery` VALUES ('1467', '16146', '21', '22', '25', '29', '34', '1', '11', '21222529340111');
+INSERT INTO `lottery` VALUES ('1468', '16147', '7', '19', '20', '28', '30', '4', '12', '07192028300412');
+INSERT INTO `lottery` VALUES ('1469', '16148', '5', '14', '15', '23', '25', '6', '8', '05141523250608');
+INSERT INTO `lottery` VALUES ('1470', '16149', '1', '2', '3', '12', '33', '4', '9', '01020312330409');
+INSERT INTO `lottery` VALUES ('1471', '16150', '1', '10', '18', '24', '29', '7', '10', '01101824290710');
+INSERT INTO `lottery` VALUES ('1472', '16151', '4', '7', '11', '14', '21', '5', '12', '04071114210512');
+INSERT INTO `lottery` VALUES ('1473', '16152', '8', '17', '22', '24', '30', '5', '11', '08172224300511');
+INSERT INTO `lottery` VALUES ('1474', '16153', '13', '18', '25', '29', '35', '3', '11', '13182529350311');
+INSERT INTO `lottery` VALUES ('1475', '16154', '6', '16', '17', '21', '29', '4', '6', '06161721290406');
+INSERT INTO `lottery` VALUES ('1476', '17001', '7', '9', '20', '31', '33', '8', '10', '07092031330810');
+INSERT INTO `lottery` VALUES ('1477', '17002', '7', '12', '14', '31', '34', '9', '11', '07121431340911');
+INSERT INTO `lottery` VALUES ('1478', '17003', '3', '5', '6', '13', '22', '9', '12', '03050613220912');
+INSERT INTO `lottery` VALUES ('1479', '17004', '5', '8', '11', '28', '31', '6', '7', '05081128310607');
+INSERT INTO `lottery` VALUES ('1480', '17005', '5', '9', '20', '26', '35', '2', '11', '05092026350211');
+INSERT INTO `lottery` VALUES ('1481', '17006', '4', '6', '23', '32', '33', '5', '6', '04062332330506');
+INSERT INTO `lottery` VALUES ('1482', '17007', '8', '11', '17', '25', '27', '2', '4', '08111725270204');
+INSERT INTO `lottery` VALUES ('1483', '17008', '3', '4', '9', '25', '32', '2', '4', '03040925320204');
+INSERT INTO `lottery` VALUES ('1484', '17009', '5', '6', '8', '12', '22', '3', '4', '05060812220304');
+INSERT INTO `lottery` VALUES ('1485', '17010', '4', '10', '13', '18', '35', '1', '2', '04101318350102');
+INSERT INTO `lottery` VALUES ('1486', '17011', '5', '15', '21', '29', '34', '6', '9', '05152129340609');
+INSERT INTO `lottery` VALUES ('1487', '17012', '4', '5', '24', '26', '35', '7', '12', '04052426350712');
+INSERT INTO `lottery` VALUES ('1488', '17013', '5', '12', '17', '30', '34', '11', '12', '05121730341112');
+INSERT INTO `lottery` VALUES ('1489', '17014', '4', '8', '15', '24', '25', '2', '5', '04081524250205');
+INSERT INTO `lottery` VALUES ('1490', '17015', '1', '7', '19', '27', '34', '1', '2', '01071927340102');
+INSERT INTO `lottery` VALUES ('1491', '17016', '3', '13', '28', '30', '33', '9', '10', '03132830330910');
+INSERT INTO `lottery` VALUES ('1492', '17017', '4', '19', '24', '26', '29', '4', '6', '04192426290406');
+INSERT INTO `lottery` VALUES ('1493', '17018', '6', '7', '10', '17', '23', '1', '9', '06071017230109');
+INSERT INTO `lottery` VALUES ('1494', '17019', '2', '6', '14', '23', '25', '2', '10', '02061423250210');
+INSERT INTO `lottery` VALUES ('1495', '17020', '16', '21', '24', '27', '28', '4', '7', '16212427280407');
+INSERT INTO `lottery` VALUES ('1496', '17021', '1', '15', '17', '20', '26', '6', '8', '01151720260608');
+INSERT INTO `lottery` VALUES ('1497', '17022', '2', '3', '9', '17', '24', '6', '12', '02030917240612');
+INSERT INTO `lottery` VALUES ('1498', '17023', '5', '8', '12', '24', '34', '7', '10', '05081224340710');
+INSERT INTO `lottery` VALUES ('1499', '17024', '21', '23', '29', '32', '35', '11', '12', '21232932351112');
+INSERT INTO `lottery` VALUES ('1500', '17025', '10', '16', '19', '20', '34', '4', '5', '10161920340405');
+INSERT INTO `lottery` VALUES ('1501', '17026', '10', '14', '19', '25', '32', '2', '7', '10141925320207');
+INSERT INTO `lottery` VALUES ('1502', '17027', '8', '17', '25', '33', '34', '3', '11', '08172533340311');
+INSERT INTO `lottery` VALUES ('1503', '17028', '6', '18', '22', '23', '33', '9', '11', '06182223330911');
+INSERT INTO `lottery` VALUES ('1504', '17029', '1', '6', '14', '17', '29', '1', '11', '01061417290111');
+INSERT INTO `lottery` VALUES ('1505', '17030', '21', '22', '24', '29', '34', '5', '6', '21222429340506');
+INSERT INTO `lottery` VALUES ('1506', '17031', '2', '16', '17', '30', '32', '2', '9', '02161730320209');
+INSERT INTO `lottery` VALUES ('1507', '17032', '2', '13', '14', '18', '29', '3', '9', '02131418290309');
+INSERT INTO `lottery` VALUES ('1508', '17033', '15', '22', '23', '25', '34', '5', '11', '15222325340511');
+INSERT INTO `lottery` VALUES ('1509', '17034', '6', '12', '21', '26', '29', '2', '11', '06122126290211');
+INSERT INTO `lottery` VALUES ('1510', '17035', '14', '17', '22', '30', '33', '7', '12', '14172230330712');
+INSERT INTO `lottery` VALUES ('1511', '17036', '1', '4', '9', '18', '33', '2', '5', '01040918330205');
+INSERT INTO `lottery` VALUES ('1512', '17037', '13', '15', '16', '32', '34', '6', '11', '13151632340611');
+
+-- ----------------------------
+-- Table structure for permission
+-- ----------------------------
+DROP TABLE IF EXISTS `permission`;
+CREATE TABLE `permission` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `level` tinyint(3) DEFAULT NULL,
+  `url` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parent` int(5) DEFAULT NULL,
+  `is_parent` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='权限表';
+
+-- ----------------------------
+-- Records of permission
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for role
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `available` tinyint(1) DEFAULT NULL,
+  `descript` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色表';
+
+-- ----------------------------
+-- Records of role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for role_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `role_permission`;
+CREATE TABLE `role_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) DEFAULT NULL,
+  `permission_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色权限表';
+
+-- ----------------------------
+-- Records of role_permission
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `last_login_time` datetime DEFAULT NULL,
+  `identifying_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '重置密码验证码',
+  `reset_pwd_avilibale_time` datetime DEFAULT NULL COMMENT '本次重置最后期限',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户表';
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user_detail_info
+-- ----------------------------
+DROP TABLE IF EXISTS `user_detail_info`;
+CREATE TABLE `user_detail_info` (
+  `id` int(11) NOT NULL,
+  `user_id` int(255) NOT NULL DEFAULT '0',
+  `real_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `sex` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `logo_img` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`,`user_id`),
+  UNIQUE KEY `user_id_index` (`user_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户信息表';
+
+-- ----------------------------
+-- Records of user_detail_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for use_role
+-- ----------------------------
+DROP TABLE IF EXISTS `use_role`;
+CREATE TABLE `use_role` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户角色表';
+
+-- ----------------------------
+-- Records of use_role
+-- ----------------------------
