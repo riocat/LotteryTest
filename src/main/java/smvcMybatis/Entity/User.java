@@ -1,25 +1,34 @@
 package smvcMybatis.Entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8098476265201703703L;
 
-	private String userName;
+	private int id;
+	private String name;
 	private String password;
-	private int roleId;
 	private String email;
+	private Date createTime;
+	private Date resetPwdAvilibaleTime;
+	private String identifyingCode;
 
-	public String getUserName() {
-		return userName;
+	public int getId() {
+		return id;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {
@@ -28,14 +37,6 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	public int getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
 	}
 
 	public String getEmail() {
@@ -46,4 +47,27 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getResetPwdAvilibaleTime() {
+		return resetPwdAvilibaleTime;
+	}
+
+	public void setResetPwdAvilibaleTime(Date resetPwdAvilibaleTime) {
+		this.resetPwdAvilibaleTime = resetPwdAvilibaleTime;
+	}
+
+	public String getIdentifyingCode() {
+		return identifyingCode;
+	}
+
+	public void setIdentifyingCode(String identifyingCode) {
+		this.identifyingCode = identifyingCode;
+	}
 }

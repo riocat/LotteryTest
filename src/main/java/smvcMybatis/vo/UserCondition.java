@@ -3,17 +3,17 @@ package smvcMybatis.vo;
 //@JsonIgnoreProperties(ignoreUnknown=true)
 public class UserCondition {
 
-	private String userName;
+	private String name;
 	private String password;
 	private String email;
 	private String checkKey;
 
-	public String getUserName() {
-		return userName;
+	public String getName() {
+		return name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPassword() {

@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
+import org.springframework.web.servlet.ModelAndView;
 import smvcMybatis.Entity.User;
 import smvcMybatis.Service.UserService;
 import smvcMybatis.util.JsonResult;
 import smvcMybatis.vo.UserCondition;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @SessionAttributes("user")
@@ -23,7 +25,7 @@ public class LoginController {
 	@RequestMapping(value = "login")
 	@ResponseBody
 	public JsonResult login(@RequestBody UserCondition condition, Model model) {
-		User user = userService.getUserByName(condition.getUserName());
+		User user = userService.getUserByName(condition.getName());
 		if (user == null) {
 			return new JsonResult(JsonResult.FAIL, null, "用户名不存在");
 		} else if (!user.getPassword().equals(condition.getPassword())) {
@@ -56,4 +58,11 @@ public class LoginController {
 //		httpSession.setAttribute("user", user);
 //		return mav;
 //	}
+
+	@RequestMapping(value = "/test")
+	public ModelAndView loginTest() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("testJsp/container");
+		return mav;
+	}
 }

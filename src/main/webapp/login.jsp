@@ -44,6 +44,9 @@
 					<td><span><label><strong>赤座灯里</strong></label></span></td>
 				</tr>
 				<tr>
+					<td><span><label><strong><a href="test">test</a></strong></label></span></td>
+				</tr>
+				<tr>
 					<td><span><label><strong>三上姐我老婆</strong></label></span></td>
 				</tr>
 			</table>
@@ -73,7 +76,7 @@
 							用户名
 						</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="userName" ng-model="user.userName" placeholder="用户名">
+							<input type="text" class="form-control" id="userName" ng-model="user.name" placeholder="用户名">
 						</div>
 					</div>
 					<div class="form-group">

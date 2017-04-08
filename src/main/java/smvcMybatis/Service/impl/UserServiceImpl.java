@@ -30,12 +30,17 @@ public class UserServiceImpl implements UserService {
 	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public int regester(UserCondition user) throws Exception {
 		int j = userDao.regester(user);
-		System.out.println(j);
-		throw new RuntimeException();
+
+
+//		System.out.println(j);
+//		throw new RuntimeException();
+
+
 //		throw new FileNotFoundException();
 //		String d = null;
 //		System.out.println(d.length());
-//		return j;
+
+		return j;
 	}
 
 }

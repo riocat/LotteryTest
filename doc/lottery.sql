@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2017-04-07 11:01:58
+Date: 2017-04-07 15:53:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1604,8 +1604,9 @@ CREATE TABLE `role_permission` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `last_login_time` datetime DEFAULT NULL,
@@ -1623,7 +1624,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user_detail_info`;
 CREATE TABLE `user_detail_info` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(255) NOT NULL DEFAULT '0',
   `real_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1644,7 +1645,7 @@ CREATE TABLE `user_detail_info` (
 -- ----------------------------
 DROP TABLE IF EXISTS `use_role`;
 CREATE TABLE `use_role` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)

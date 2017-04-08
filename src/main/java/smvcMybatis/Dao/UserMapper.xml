@@ -3,12 +3,12 @@
 <mapper namespace="smvcMybatis.Dao.UserDao">
 	<select id="getUserByName" parameterType="string"
 		resultType="smvcMybatis.Entity.User">
-		SELECT * FROM sys_user u WHERE u.username = #{name}
+		SELECT * FROM user u WHERE u.name = #{name}
 	</select>
 
 	<insert id="regester" parameterType="smvcMybatis.vo.UserCondition">
 		INSERT INTO
-		sys_user(username, password,role_id, email)
-		VALUES(#{userName},#{password},2,#{email})
+		user(name, password, email,create_time)
+		VALUES(#{name},#{password},#{email},now())
 	</insert>
 </mapper>

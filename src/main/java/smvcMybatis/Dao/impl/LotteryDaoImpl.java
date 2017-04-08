@@ -12,12 +12,12 @@ import smvcMybatis.Entity.Lottery;
 @Repository
 public class LotteryDaoImpl implements LotteryDao {
 
-	@Autowired
-	private SqlSessionTemplate sqlSession;
-	
-	@Override
-	public List<Lottery> showLotterys() {
-		return sqlSession.selectList("showLotterys");
-	}
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+    @Override
+    public List<Lottery> showLotterys() {
+        return sqlSession.selectList("showLotterys");
+    }
 
 }
