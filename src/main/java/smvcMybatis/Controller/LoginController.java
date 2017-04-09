@@ -63,6 +63,8 @@ public class LoginController {
 	public ModelAndView loginTest() {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("testJsp/container");
+		User user = userService.getUserByName("admin");
+		mav.addObject("user",user);
 		return mav;
 	}
 }

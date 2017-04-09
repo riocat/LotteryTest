@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +57,7 @@
                         <img src="assets/img/user.png" class="img-thumbnail" />
 
                         <div class="inner-text">
-                            Jhon Deo Alex
+                            ${user.name}
                             <br />
                             <small>Last Login : 2 Weeks Ago </small>
                         </div>
@@ -64,117 +65,92 @@
 
                 </li>
 
-
                 <li>
-                    <a class="active-menu" href="index.html"><i class="fa fa-dashboard "></i>Dashboard</a>
+                    <a  href="index.html">Dashboard</a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-desktop "></i>UI Elements <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="panel-tabs.html"><i class="fa fa-toggle-on"></i>Tabs & Panels</a>
-                        </li>
-                        <li>
-                            <a href="notification.html"><i class="fa fa-bell "></i>Notifications</a>
-                        </li>
-                        <li>
-                            <a href="progress.html"><i class="fa fa-circle-o "></i>Progressbars</a>
-                        </li>
-                        <li>
-                            <a href="buttons.html"><i class="fa fa-code "></i>Buttons</a>
-                        </li>
-                        <li>
-                            <a href="icons.html"><i class="fa fa-bug "></i>Icons</a>
-                        </li>
-                        <li>
-                            <a href="wizard.html"><i class="fa fa-bug "></i>Wizard</a>
-                        </li>
-                        <li>
-                            <a href="typography.html"><i class="fa fa-edit "></i>Typography</a>
-                        </li>
-                        <li>
-                            <a href="grid.html"><i class="fa fa-eyedropper "></i>Grid</a>
-                        </li>
 
-
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-yelp "></i>Extra Pages <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="invoice.html"><i class="fa fa-coffee"></i>Invoice</a>
-                        </li>
-                        <li>
-                            <a href="pricing.html"><i class="fa fa-flash "></i>Pricing</a>
-                        </li>
-                        <li>
-                            <a href="component.html"><i class="fa fa-key "></i>Components</a>
-                        </li>
-                        <li>
-                            <a href="social.html"><i class="fa fa-send "></i>Social</a>
-                        </li>
-
-                        <li>
-                            <a href="message-task.html"><i class="fa fa-recycle "></i>Messages & Tasks</a>
-                        </li>
-
-
-                    </ul>
-                </li>
-                <li>
-                    <a href="table.html"><i class="fa fa-flash "></i>Data Tables </a>
-
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-bicycle "></i>Forms <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-
-                        <li>
-                            <a href="form.html"><i class="fa fa-desktop "></i>Basic </a>
-                        </li>
-                        <li>
-                            <a href="form-advance.html"><i class="fa fa-code "></i>Advance</a>
-                        </li>
-
-
-                    </ul>
-                </li>
-                <li>
-                    <a href="gallery.html"><i class="fa fa-anchor "></i>Gallery</a>
-                </li>
-                <li>
-                    <a href="error.html"><i class="fa fa-bug "></i>Error Page</a>
-                </li>
-                <li>
-                    <a href="login.html"><i class="fa fa-sign-in "></i>Login Page</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-sitemap "></i>Multilevel Link <span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="#"><i class="fa fa-bicycle "></i>Second Level Link</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-flask "></i>Second Level Link</a>
-                        </li>
-                        <li>
-                            <a href="#">Second Level Link<span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level">
+                <c:if test="${menuList != null}">
+                    <c:forEach items="${menuList}" var="menu1">
+                        <c:choose>
+                            <c:when test="${menu1.subList == null}">
                                 <li>
-                                    <a href="#"><i class="fa fa-plus "></i>Third Level Link</a>
+                                    <a class="active-menu" href="${menu1.url}" onclick="activeMenu()">${menu1.name}个人信息</a>
                                 </li>
+                            </c:when>
+                            <c:otherwise>
                                 <li>
-                                    <a href="#"><i class="fa fa-comments-o "></i>Third Level Link</a>
+                                    <a href="#">${menu1.name} <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <c:forEach items="${menu1.subList}" var="menu2">
+                                            <c:choose>
+                                                <c:when test="${menu2.subList == null}">
+                                                    <li>
+                                                        <a href="${menu2.url}" onclick="activeMenu()">${menu2.name}</a>
+                                                    </li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li>
+                                                        <a href="#">${menu2.name} <span class="fa arrow"></span></a>
+                                                        <ul class="nav nav-third-level">
+                                                            <c:forEach items="${menu2.subList}" var="menu3">
+                                                                <c:choose>
+                                                                    <c:when test="${menu3.subList == null}">
+                                                                        <li>
+                                                                            <a href="${menu3.url}" onclick="activeMenu()">${menu3.name}</a>
+                                                                        </li>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <li>
+                                                                            <a href="#">${menu3.name} <span class="fa arrow"></span></a>
+                                                                            <ul class="nav nav-fouth-level">
+                                                                                <li>
+                                                                                    <a href="${menu4.url}" onclick="activeMenu()">${menu4.name}</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </li>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:forEach>
+                                                        </ul>
+                                                    </li>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </ul>
                                 </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                    <li>
+                        <a class="active-menu" href="#" onclick="activeMenu()">个人信息</a>
+                    </li>
+                    <li>
+                        <a href="#">UI Elements <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Tabs & Panels</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Multilevel Link <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Second Level Link</a>
+                            </li>
+                            <li>
+                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Third Level Link</a>
+                                    </li>
+                                </ul>
 
-                            </ul>
-
-                        </li>
-                    </ul>
-                </li>
+                            </li>
+                        </ul>
+                    </li>
+                </c:if>
             </ul>
-
         </div>
 
     </nav>

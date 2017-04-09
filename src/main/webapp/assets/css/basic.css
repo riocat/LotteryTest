@@ -125,7 +125,8 @@ body {
 
 
 .nav-second-level li,
-.nav-third-level li {
+.nav-third-level li,
+.nav-fouth-level{
     border-bottom: none !important;
 }
 
@@ -135,6 +136,10 @@ body {
 
     .nav-third-level li a {
         padding-left: 55px;
+    }
+
+    .nav-fouth-level li a {
+        padding-left: 73px;
     }
 
 .sidebar-collapse, .sidebar-collapse .nav {
@@ -166,13 +171,19 @@ body {
 
 
 .nav-second-level > li:last-child > a:after,
-.nav-third-level > li:last-child > a:after {
+.nav-third-level > li:last-child > a:after,
+.nav-fouth-level > li:last-child > a:after{
     height: 50%;
 }
 
 .nav-third-level > li > a:after,
 .nav-third-level > li > a:before {
     left: 40px;
+}
+
+.nav-fouth-level > li > a:after,
+.nav-fouth-level > li > a:before {
+    left: 60px;
 }
 
 .navbar-side {
