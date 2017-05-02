@@ -14,17 +14,19 @@ import smvcMybatis.Service.UserService;
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class UserServiceImplTest {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Before
-	public void setUp() throws Exception {
-	}
+    @Before
+    public void setUp() throws Exception {
+    }
 
-	@Test
-	public void testGetUserByName() {
-		User user = userService.getUserByName("Coolpad");
-		System.out.println(user.getEmail());
-	}
+    @Test
+    public void testGetUserByName() {
+        User user = userService.getUserByName("Coolpad");
+        if (user != null) {
+            System.out.println(user.getEmail());
+        }
+    }
 
 }

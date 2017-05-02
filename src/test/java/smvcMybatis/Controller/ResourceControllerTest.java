@@ -22,7 +22,7 @@ public class ResourceControllerTest {
 
 	@Test
 	public void testCheckImg() {
-		FileOutputStream fio;
+		/*FileOutputStream fio;
 		try {
 			fio = new FileOutputStream("/NW/smvcMybatisSqlSessionTemplate/src/main/webapp/img/test.png");
 			Random ran = new Random();
@@ -40,12 +40,12 @@ public class ResourceControllerTest {
 			ImageIO.write(bfi, "PNG", fio);
 			fio.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block  
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 }
