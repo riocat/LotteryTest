@@ -65,7 +65,7 @@
 	<!-- </bean> -->
 
 	<!-- <bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
-	<!-- <property name="mapperInterface" value="smvcMybatis.Dao.UserDao" /> -->
+	<!-- <property name="mapperInterface" value="UserDao" /> -->
 	<!-- <property name="sqlSessionFactory" ref="SqlSessionFactory" /> -->
 	<!-- <property name="sqlSessionFactoryBeanName" value="mySqlSessionFactory" 
 		/> -->

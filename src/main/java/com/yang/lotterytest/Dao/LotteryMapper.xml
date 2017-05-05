@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yang.lotterytest.Dao.LotteryDao">
+	<select id="showLotterys" resultType="com.yang.lotterytest.Entity.Lottery">
+		SELECT * FROM lottery l ORDER BY l.id LIMIT 0,10
+	</select>
+</mapper>

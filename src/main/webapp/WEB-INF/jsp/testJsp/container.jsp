@@ -157,7 +157,7 @@
     <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
         <div id="page-inner" >
-            <iframe style="min-height: 700px;" width="100%" height="100%" src="/login.jsp" scrolling="true" frameborder="0">
+            <iframe style="min-height: 700px;" width="100%" height="100%" src="login.jsp" scrolling="true" frameborder="0">
             </iframe>
         </div>
 

@@ -27,7 +27,7 @@
         left
     </div>
     <div id="contentDiv" class="contentDiv">
-        <iframe height="100%" width="100%" src="/login.jsp" scrolling="true" frameborder="0">
+        <iframe height="100%" width="100%" src="login.jsp" scrolling="true" frameborder="0">
         </iframe>
     </div>
 </div>
