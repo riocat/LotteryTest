@@ -4,5 +4,3 @@
 2017.5.4 -5.5
 试用jboss部署 在360浏览器由于sessinoid总在不停变化造成无法登陆 原因不详没有解决 暂不再试用jboss进行尝试 firefox及ie可以正常使用
 16:21 不知什么原因360浏览器问题也没有了现在在wildfly-10.1.0.Final中可以和tomcat一样使用
-
-修改github名称为LotteryTest
