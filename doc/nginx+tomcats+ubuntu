@@ -1,0 +1,59 @@
+在VM虚拟机上搭建Nginx+tomcats集群
+鉴于对于以前使用过程都忘了的教训，现在记录下整个环境搭建过程及问题和解决方法
+
+VM上安装ubuntu-14.04.5-server-amd64.iso
+安装开始时要注意前几步中有个很重要的选择当前所在物理位置的步骤，要选择中国，这样在使用apt-get update 、apt-get upgrade 这两个命令更新软件资源时会
+自动使用中国网址，速度快而且一般不会发生无法找到资源的情况
+安装时新建了一个sudo权限用户，此时root用户没有密码要使用所建用户执行 su passwd命令为root用户创建密码
+
+ubuntu使桥接模式和主机在同一网段内，由于默认是动态ip需要手动将其设置固定ip
+使用root账号
+进入/etc/network 修改interfaces
+进入/run/resolvconf 查看resolv.conf中是否有DNS配置
+nameserver DNS服务地址如(219.150.32.132)
+进入/etc/resolvconf/resolv.conf.d 修改base为其添加上步加入的DNS
+重启网卡service networking restart或重启
+
+
+JDK
+Oracle上下载jdk 将tar包放入 /usr/local/下 解压，再进入/etc中修改 profile文件添加环境变量
+export JAVA_HOME=/usr/local/jdk1.8.0_101
+export CLASSPATH=.:$JAVA_HOME/lib
+export PATH=$PATH:$JAVA_HOME/bin
+重启一下
+
+nginx安装
+先从官网下载nginx，tar包放入/usr/local/下解压
+因为需要gcc、pcre、zlib和openssl先确保这些已安装
+可以使用dpkg --get-selections | grep pcre 这样的命令查看是否安装了所需软件
+也可以使用whereis gcc这种方式查看
+
+不确定的话直接进入nginx解压后的文件夹直接编译如果未安装以上依赖则会直接报错
+
+如果发生缺少依赖的情况则需要使用apt-get安装
+安装gcc
+sudo apt-get install build-essential
+pcre安装
+sudo apt-get install libpcre3 libpcre3-dev
+zlib安装
+sudo apt-get install zlib1g-dev
+openssl安装
+sudo apt-get install openssl libssl-dev
+
+用以下命令编译，具体详情可以参考nignx中文网http://www.nginx.cn/install
+注意应该加上--prefix=path    定义一个目录，存放服务器上的文件 ，也就是nginx的安装目录。默认使用 /usr/local/nginx
+./configure --sbin-path=/usr/local/nginx/nginx --conf-path=/usr/local/nginx/nginx.conf --pid-path=/usr/local/nginx/nginx.pid --with-http_ssl_module
+没问题直接执行make命令
+再执行make install命令
+
+此时/usr/local/nginx/下的nginx即位可以使用的nginx命令，可以在/usr/bin中创建它的硬连接将其加入基本命令
+可以使用sudo nginx命令启动nginx 再使用sudo nginx -s stop停止
+nginx简单的tomcat集群方式参见nginx.conf例子
+
+安装tomcat
+将tomcat安装包cp到/usr/local下解压，修改bin中的catalina.sh为其添加java_home等变量，修改conf中的server.xml部署项目
+以此方式安装两个tomcat注意每个的server.xml里的端口号一定要修改完全
+
+nginx+tomcat集群
+先后启动两个tomcat再启动配置好的nginx即可
+
