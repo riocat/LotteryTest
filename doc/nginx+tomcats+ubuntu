@@ -117,6 +117,7 @@ tomcat的lib包中添加以下包
       </Host>
 
 再先后启动各个tomcat,最后启动nginx即可
+memcached关闭：使用sudo kill -9 pid方式关闭，pid 可在/run/usr/中找到，使用cat等命令查看一下即可
 
 
 
