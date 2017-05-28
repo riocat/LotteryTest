@@ -7,6 +7,7 @@ VM上安装ubuntu-14.04.5-server-amd64.iso
 安装时新建了一个sudo权限用户，此时root用户没有密码要使用所建用户执行 su passwd命令为root用户创建密码
 
 ubuntu使桥接模式和主机在同一网段内，由于默认是动态ip需要手动将其设置固定ip
+查看网关使用命令 route -n
 使用root账号
 进入/etc/network 修改interfaces
 进入/run/resolvconf 查看resolv.conf中是否有DNS配置
@@ -53,7 +54,70 @@ nginx简单的tomcat集群方式参见nginx.conf例子
 安装tomcat
 将tomcat安装包cp到/usr/local下解压，修改bin中的catalina.sh为其添加java_home等变量，修改conf中的server.xml部署项目
 以此方式安装两个tomcat注意每个的server.xml里的端口号一定要修改完全
+由于ubuntu上未安装数据库直接连接的windows主机的数据库所以要打开主机防火墙对3306端口的限制（修改防火墙入站规则，在其上添加3306的访问许可）
+并且要给本地mysql数据库授予远程连接权限
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;    %允许所有机器访问
+FLUSH PRIVILEGES;
 
 nginx+tomcat集群
 先后启动两个tomcat再启动配置好的nginx即可
+
+多个tomcat可以使用同一个放在其他独立路径中的应用如放在/home/uio文件夹中的LotteryTest
+<Context docBase="/home/uio/LotteryTest" path="/" reloadable="true" source="org.eclipse.jst.jee.server:EMPlat"/>
+
+使用memcached进行tomcat集群session同步
+安装memcached
+sudo apt-get install memcached
+启动
+sudo memcached -u root -p 11211 -m 64m -d -l 127.0.0.1
+tomcat的lib包中添加以下包
+		<dependency>
+            <groupId>de.javakaffee.msm</groupId>
+            <artifactId>memcached-session-manager-tc7</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javolution</groupId>
+            <artifactId>javolution</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>de.javakaffee.msm</groupId>
+            <artifactId>msm-javolution-serializer</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+		
+在tomcat server.xml的Context中添加Manager
+<Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+
+        <!-- SingleSignOn valve, share authentication between web applications
+             Documentation at: /docs/config/valve.html -->
+        <!--
+        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
+        -->
+
+        <!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern="common" -->
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log." suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+			<Context docBase="ROOT" path="/" reloadable="true" source="org.eclipse.jst.jee.server:EMPlat">
+				<Manager className="de.javakaffee.web.msm.MemcachedBackupSessionManager"   
+					memcachedNodes="n1:localhost:11211"   
+					requestUriIgnorePattern=".*\.(png|gif|jpg|css|js)$"   
+					sessionBackupAsync="false"   
+					sessionBackupTimeout="100"   
+					transcoderFactoryClass="de.javakaffee.web.msm.serializer.javolution.JavolutionTranscoderFactory"   
+					copyCollectionsForSerialization="false" />
+			</Context>
+		   
+      </Host>
+
+再先后启动各个tomcat,最后启动nginx即可
+
+
+
 
