@@ -1,0 +1,153 @@
+在VM虚拟机上搭建Nginx+tomcats集群(必须使用文件服务器)
+鉴于对于以前使用过程都忘了的教训，现在记录下整个环境搭建过程及问题和解决方法
+
+VM上安装ubuntu-14.04.5-server-amd64.iso
+安装开始时要注意前几步中有个很重要的选择当前所在物理位置的步骤，要选择中国，这样在使用apt-get update 、apt-get upgrade 这两个命令更新软件资源时会
+自动使用中国网址，速度快而且一般不会发生无法找到资源的情况
+安装时新建了一个sudo权限用户，此时root用户没有密码要使用所建用户执行 su passwd命令为root用户创建密码
+
+ubuntu使桥接模式和主机在同一网段内，由于默认是动态ip需要手动将其设置固定ip
+查看网关使用命令 route -n
+使用root账号
+进入/etc/network 修改interfaces
+进入/run/resolvconf 查看resolv.conf中是否有DNS配置
+nameserver DNS服务地址如(219.150.32.132)
+进入/etc/resolvconf/resolv.conf.d 修改base为其添加上步加入的DNS
+重启网卡service networking restart或重启
+
+JDK
+Oracle上下载jdk 将tar包放入 /usr/local/下 解压，再进入/etc中修改 profile文件添加环境变量
+export JAVA_HOME=/usr/local/jdk1.8.0_101
+export CLASSPATH=.:$JAVA_HOME/lib
+export PATH=$PATH:$JAVA_HOME/bin
+重启一下
+
+nginx安装
+先从官网下载nginx，tar包放入/usr/local/下解压
+因为需要gcc、pcre、zlib和openssl先确保这些已安装
+可以使用dpkg --get-selections | grep pcre 这样的命令查看是否安装了所需软件
+也可以使用whereis gcc这种方式查看
+
+不确定的话直接进入nginx解压后的文件夹直接编译如果未安装以上依赖则会直接报错
+
+如果发生缺少依赖的情况则需要使用apt-get安装
+安装gcc
+sudo apt-get install build-essential
+pcre安装
+sudo apt-get install libpcre3 libpcre3-dev
+zlib安装
+sudo apt-get install zlib1g-dev
+openssl安装
+sudo apt-get install openssl libssl-dev
+
+用以下命令编译，具体详情可以参考nignx中文网http://www.nginx.cn/install
+注意应该加上--prefix=path    定义一个目录，存放服务器上的文件 ，也就是nginx的安装目录。默认使用 /usr/local/nginx
+./configure --sbin-path=/usr/local/nginx/nginx --conf-path=/usr/local/nginx/nginx.conf --pid-path=/usr/local/nginx/nginx.pid --with-http_ssl_module
+没问题直接执行make命令
+再执行make install命令
+
+此时/usr/local/nginx/下的nginx即位可以使用的nginx命令，可以在/usr/bin中创建它的硬连接将其加入基本命令
+可以使用sudo nginx命令启动nginx 再使用sudo nginx -s stop停止
+nginx简单的tomcat集群方式参见nginx.conf例子
+
+安装tomcat
+将tomcat安装包cp到/usr/local下解压，修改bin中的catalina.sh为其添加java_home等变量，修改conf中的server.xml部署项目
+以此方式安装两个tomcat注意每个的server.xml里的端口号一定要修改完全
+由于ubuntu上未安装数据库直接连接的windows主机的数据库所以要打开主机防火墙对3306端口的限制（修改防火墙入站规则，在其上添加3306的访问许可）
+并且要给本地mysql数据库授予远程连接权限
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;    %允许所有机器访问
+FLUSH PRIVILEGES;
+
+nginx+tomcat集群
+先后启动两个tomcat再启动配置好的nginx即可
+
+多个tomcat可以使用同一个放在其他独立路径中的应用如放在/home/uio文件夹中的LotteryTest
+<Context docBase="/home/uio/LotteryTest" path="/" reloadable="true" source="org.eclipse.jst.jee.server:EMPlat"/>
+
+使用memcached进行tomcat集群session同步
+安装memcached
+sudo apt-get install memcached
+启动
+sudo memcached -u root -p 11211 -m 64m -d -l 127.0.0.1
+tomcat的lib包中添加以下包
+		<dependency>
+            <groupId>de.javakaffee.msm</groupId>
+            <artifactId>memcached-session-manager-tc7</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javolution</groupId>
+            <artifactId>javolution</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>de.javakaffee.msm</groupId>
+            <artifactId>msm-javolution-serializer</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+		
+在tomcat server.xml的Context中添加Manager
+<Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true">
+
+        <!-- SingleSignOn valve, share authentication between web applications
+             Documentation at: /docs/config/valve.html -->
+        <!--
+        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
+        -->
+
+        <!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern="common" -->
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log." suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+			<Context docBase="ROOT" path="/" reloadable="true" source="org.eclipse.jst.jee.server:EMPlat">
+				<Manager className="de.javakaffee.web.msm.MemcachedBackupSessionManager"   
+					memcachedNodes="n1:localhost:11211"   
+					requestUriIgnorePattern=".*\.(png|gif|jpg|css|js)$"   
+					sessionBackupAsync="false"   
+					sessionBackupTimeout="100"   
+					transcoderFactoryClass="de.javakaffee.web.msm.serializer.javolution.JavolutionTranscoderFactory"   
+					copyCollectionsForSerialization="false" />
+			</Context>
+		   
+      </Host>
+
+再先后启动各个tomcat,最后启动nginx即可
+memcached关闭：使用sudo kill -9 pid方式关闭，pid 可在/run/usr/中找到，使用cat等命令查看一下即可
+
+nginx+tomcat
+动静分离可以使用正则将对一些静态资源的请求映射到某个固定路径下直接从硬盘读取
+		location ~ /lt {
+             proxy_pass http://mytomcats.com;
+             proxy_redirect default;
+        }
+
+        location ~ .*\.(js|css|ico|png|jpg|eot|svg|ttf|woff|html) {
+            #所有静态文件直接读取硬盘
+            root /home/uio/download/LotteryTest;
+            expires 30d;#缓存30天
+        }
+
+当应用有项目名时要在location里配置上项目名
+location /项目名 {
+}
+
+Ubuntu下搭建FTP服务器
+首先用命令检查是否安装了vsftpd
+vsftpd -version
+sudo apt-get install vsftpd
+新建用户
+adduser fileftp
+修改vsftpd配置文件
+用命令打开/etc/vsftpd.conf
+使用FTPClient在代码中对将文件上传FTP或从FTP下载。参见testController
+TODO 文件服务器集群容灾
+
+2017/6/1/ 23:26 至此进一周完成了nginx+tomcat+memcached+vsftpd搭建动静分离tomcat集群及文件服务器的实验
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————
+
+TODO 将session缓存修改为redis版本

@@ -6,7 +6,7 @@
         </span>
         <span class="userInfoSpan" id="userInfoSpan">
             <span id="imgLableSpan">
-                <img src="/img/130641932834908062.jpg" id="headImg">
+                <img src="img/130641932834908062.jpg" id="headImg">
                 <label id="nameLabel">name</label>
             </span>
             <span class="downItem">

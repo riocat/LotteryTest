@@ -65,7 +65,7 @@
 	<!-- </bean> -->
 
 	<!-- <bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean"> -->
-	<!-- <property name="mapperInterface" value="smvcMybatis.Dao.UserDao" /> -->
+	<!-- <property name="mapperInterface" value="UserDao" /> -->
 	<!-- <property name="sqlSessionFactory" ref="SqlSessionFactory" /> -->
 	<!-- <property name="sqlSessionFactoryBeanName" value="mySqlSessionFactory" 
 		/> -->
@@ -77,7 +77,7 @@
 		<property name="configLocation" value="classpath:mybatis.xml"></property>
 	</bean>
 
-	<bean id="" class="org.mybatis.spring.SqlSessionTemplate">
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 		<constructor-arg index="1" value="REUSE" />
 	</bean>
