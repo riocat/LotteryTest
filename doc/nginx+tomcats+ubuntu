@@ -1,4 +1,4 @@
-在VM虚拟机上搭建Nginx+tomcats集群
+在VM虚拟机上搭建Nginx+tomcats集群(必须使用文件服务器)
 鉴于对于以前使用过程都忘了的教训，现在记录下整个环境搭建过程及问题和解决方法
 
 VM上安装ubuntu-14.04.5-server-amd64.iso
@@ -14,7 +14,6 @@ ubuntu使桥接模式和主机在同一网段内，由于默认是动态ip需要
 nameserver DNS服务地址如(219.150.32.132)
 进入/etc/resolvconf/resolv.conf.d 修改base为其添加上步加入的DNS
 重启网卡service networking restart或重启
-
 
 JDK
 Oracle上下载jdk 将tar包放入 /usr/local/下 解压，再进入/etc中修改 profile文件添加环境变量
@@ -119,6 +118,36 @@ tomcat的lib包中添加以下包
 再先后启动各个tomcat,最后启动nginx即可
 memcached关闭：使用sudo kill -9 pid方式关闭，pid 可在/run/usr/中找到，使用cat等命令查看一下即可
 
+nginx+tomcat
+动静分离可以使用正则将对一些静态资源的请求映射到某个固定路径下直接从硬盘读取
+		location ~ /lt {
+             proxy_pass http://mytomcats.com;
+             proxy_redirect default;
+        }
 
+        location ~ .*\.(js|css|ico|png|jpg|eot|svg|ttf|woff|html) {
+            #所有静态文件直接读取硬盘
+            root /home/uio/download/LotteryTest;
+            expires 30d;#缓存30天
+        }
 
+当应用有项目名时要在location里配置上项目名
+location /项目名 {
+}
 
+Ubuntu下搭建FTP服务器
+首先用命令检查是否安装了vsftpd
+vsftpd -version
+sudo apt-get install vsftpd
+新建用户
+adduser fileftp
+修改vsftpd配置文件
+用命令打开/etc/vsftpd.conf
+使用FTPClient在代码中对将文件上传FTP或从FTP下载。参见testController
+TODO 文件服务器集群容灾
+
+2017/6/1/ 23:26 至此进一周完成了nginx+tomcat+memcached+vsftpd搭建动静分离tomcat集群及文件服务器的实验
+
+——————————————————————————————————————————————————————————————————————————————————————————————————————
+
+TODO 将session缓存修改为redis版本

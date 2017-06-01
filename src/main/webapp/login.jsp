@@ -41,7 +41,7 @@
 					<td><span><label ng-click="toshowLotterys()"><strong>最新彩票</strong></label></span></td>
 				</tr>
 				<tr>
-					<td><span><label><strong>赤座灯里</strong></label></span></td>
+					<td><span><label><strong><a href="FtpTest.jsp">赤座灯里</a></strong></label></span></td>
 				</tr>
 				<tr>
 					<td><span><label><strong><a href="test">test</a></strong></label></span></td>
