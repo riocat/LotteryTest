@@ -33,8 +33,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="LotteryTest" target="1.8" />
-      <module name="smvcMybatis" target="1.8" />
+      <module name="LotteryTest" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
