@@ -58,6 +58,9 @@ nginx简单的tomcat集群方式参见nginx.conf例子
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;    %允许所有机器访问
 FLUSH PRIVILEGES;
 
+mysql8 版本授权有变化 用户和HOST作为主键是一条身份信息 所以要新建一个root且HOST为%的用户(mysql数据库的user表)
+https://blog.csdn.net/jian89jian/article/details/80978483
+
 nginx+tomcat集群
 先后启动两个tomcat再启动配置好的nginx即可
 
