@@ -1,26 +1,25 @@
 package com.yang.lotterytest.util;
 
 public class JsonResult {
-	public static final String SUCCESS = "success";
-	public static final String FAIL = "fail";
-	private String result;
+
+	private JsonResultStatus result;
 	private Object data;
 	private String message;
 
 	public JsonResult() {
 	}
 
-	public JsonResult(String result, Object data, String message) {
+	public JsonResult(JsonResultStatus result, Object data, String message) {
 		this.result = result;
 		this.data = data;
 		this.message = message;
 	}
 
-	public String getResult() {
+	public JsonResultStatus getResult() {
 		return result;
 	}
 
-	public void setResult(String result) {
+	public void setResult(JsonResultStatus result) {
 		this.result = result;
 	}
 

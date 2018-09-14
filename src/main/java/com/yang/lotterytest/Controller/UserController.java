@@ -2,6 +2,7 @@ package com.yang.lotterytest.Controller;
 
 import com.yang.lotterytest.Entity.User;
 import com.yang.lotterytest.Service.UserService;
+import com.yang.lotterytest.util.JsonResultStatus;
 import com.yang.lotterytest.vo.UserCondition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,7 @@ public class UserController {
 	@ResponseBody
 	public JsonResult regester(@RequestBody UserCondition condition, @ModelAttribute("ckeckCode") String checkKey) {
 		if (!checkKey.equals(condition.getCheckKey())) {
-			return new JsonResult(JsonResult.FAIL, null, "");
+			return new JsonResult(JsonResultStatus.fail, null, "");
 		}
 		int result = 0;
 		try {
@@ -52,8 +53,8 @@ public class UserController {
 			e.printStackTrace();
 		}
 		if (result == 1) {
-			return new JsonResult(JsonResult.SUCCESS, null, "注册成功");
+			return new JsonResult(JsonResultStatus.success, null, "注册成功");
 		}
-		return new JsonResult(JsonResult.FAIL, null, "注册失败");
+		return new JsonResult(JsonResultStatus.fail, null, "注册失败");
 	}
 }

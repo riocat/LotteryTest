@@ -14,33 +14,39 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yang.lotterytest.Entity.User;
+import com.yang.lotterytest.util.StaticFinalValue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 /**
  * Servlet Filter implementation class SessionCheckFilter
  */
 public class SessionCheckFilter implements Filter {
 
-	private List<String> loginPaths;
+    private List<String> loginPaths;
 
-	/**
-	 * Default constructor.
-	 */
-	public SessionCheckFilter() {
-		// TODO Auto-generated constructor stub
-	}
+    private boolean isSkip;
 
-	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
-	
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 * 第一种
-	 */
-	/*
+    /**
+     * Default constructor.
+     */
+    public SessionCheckFilter() {
+        // TODO Auto-generated constructor stub
+    }
+
+    /**
+     * @see Filter#destroy()
+     */
+    public void destroy() {
+        // TODO Auto-generated method stub
+    }
+
+    /**
+     * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+     * 第一种
+     */
+    /*
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest hsr = (HttpServletRequest) request;
@@ -55,35 +61,47 @@ public class SessionCheckFilter implements Filter {
 	}
 	*/
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 * 第二种
-	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		HttpServletRequest hsr = (HttpServletRequest) request;
-		HttpServletResponse res = (HttpServletResponse) response;
-		String servletPath = hsr.getServletPath();
-		for (String loginPath : loginPaths) {
-			if (servletPath.matches(loginPath)) {
-				User user = (User) hsr.getSession().getAttribute("user");
-				if (user == null) {
-					String url = hsr.getContextPath();
-					res.sendRedirect(url);
-					return;
-				}
-			}
-		}
-		chain.doFilter(request, response);
-	}
+    /**
+     * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+     * 第二种
+     */
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
 
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		String includePath = fConfig.getInitParameter("includePathPatterns");
-		String[] temp = includePath.split(",");
-		loginPaths = Arrays.asList(temp);
-	}
+        if (!isSkip) {
+            Logger logger = LoggerFactory.getLogger(SessionCheckFilter.class);
+            logger.info("SessionCheckFilter working");
+
+            HttpServletRequest hsr = (HttpServletRequest) request;
+            User user = (User) hsr.getSession().getAttribute("user");
+            if (user == null) {
+                HttpServletResponse res = (HttpServletResponse) response;
+                String servletPath = hsr.getServletPath();
+                for (String loginPath : loginPaths) {
+                    if (servletPath.matches(loginPath)) {
+                        String url = hsr.getContextPath();
+                        if(StringUtils.isEmpty(url)){
+                            url = "/";
+                        }
+                        res.sendRedirect(url);
+                        return;
+                    }
+                }
+            }
+        }
+
+        chain.doFilter(request, response);
+    }
+
+    /**
+     * @see Filter#init(FilterConfig)
+     */
+    public void init(FilterConfig fConfig) throws ServletException {
+        String includePath = fConfig.getInitParameter("includePathPatterns");
+        String[] temp = includePath.split(",");
+        this.loginPaths = Arrays.asList(temp);
+
+        this.isSkip = StaticFinalValue.TRUE_STR_L.equals(fConfig.getInitParameter("isSkip")) ? true : false;
+    }
 
 }

@@ -58,6 +58,9 @@ nginx简单的tomcat集群方式参见nginx.conf例子
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;    %允许所有机器访问
 FLUSH PRIVILEGES;
 
+mysql8 版本授权有变化 用户和HOST作为主键是一条身份信息 所以要新建一个root且HOST为%的用户(mysql数据库的user表)
+https://blog.csdn.net/jian89jian/article/details/80978483
+
 nginx+tomcat集群
 先后启动两个tomcat再启动配置好的nginx即可
 
@@ -103,7 +106,7 @@ tomcat的lib包中添加以下包
                prefix="localhost_access_log." suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
-			<Context docBase="ROOT" path="/" reloadable="true" source="org.eclipse.jst.jee.server:EMPlat">
+			<Context docBase="ROOT" path="/" reloadable="true">
 				<Manager className="de.javakaffee.web.msm.MemcachedBackupSessionManager"   
 					memcachedNodes="n1:localhost:11211"   
 					requestUriIgnorePattern=".*\.(png|gif|jpg|css|js)$"   
@@ -150,4 +153,39 @@ TODO 文件服务器集群容灾
 
 ——————————————————————————————————————————————————————————————————————————————————————————————————————
 
-TODO 将session缓存修改为redis版本
+将session缓存修改为redis版本
+http://mvnrepository.com/artifact/de.javakaffee.msm/memcached-session-manager-tc7/2.1.0
+redis session缓存
+        应该只适合tomcat8
+        <dependency>
+            <groupId>com.github.jkutner</groupId>
+            <artifactId>tomcat-redis-session</artifactId>
+            <version>8.5.5.0</version>
+        </dependency>
+
+        适合tomcat7
+                <dependency>
+                    <groupId>com.github.jkutner</groupId>
+                    <artifactId>tomcat-redis-session</artifactId>
+                    <version>8.0.18.1</version>
+                </dependency>
+
+
+*memcached-session-manager-tc7 也用到了jedis-2.9.0.jar
+
+只需三种jar包
+commons-pool2-2.4.2.jar
+jedis-2.9.0.jar
+tomcat-redis-session-8.5.5.0.jar
+
+安装redis
+1.直接使用 apt-get install redis-server
+2.https://redis.io/download 下载tar，解压，进入解压后的/usr/local/redis-3.2.9直接执行make。执行之后redis-3.2.9中的src文件夹
+中就有了可执行文件，./redis-server 启动服务  ./redis-cli启动客户端
+使用./redis-cli -p 6379 shutdown这样的命令可以关闭redis服务
+使用sudo ln /usr/local/redis-3.2.9/src/redis-server redis-server 硬链接方式将redis-server设为系统命令
+
+
+tomcat-redis-session和tomcat版本紧密相关，必须注意版本适配问题，由于tomcat使用sudo命令启动，因此redis-server也必须使用sudo启动，否则
+会由于数据库存储文件权限问题造成无法写入磁盘发生异常
+

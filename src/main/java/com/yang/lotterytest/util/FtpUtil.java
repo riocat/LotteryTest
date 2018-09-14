@@ -88,7 +88,9 @@ public class FtpUtil {
         }
     }
 
-    //    登陆后在用户文件夹下只能使用changeWorkingDirectory一级一级跳转否则无法跳转创建文件夹会发生550命令未执行
+    //
+    // changeWorkingDirectory直接使用"temp/20170601"这样的参数应该也可以不过2017/6/1多次测试失败使用以下多次跳转的方式
+    // 登陆后在用户文件夹下使用changeWorkingDirectory一级一级跳转可以解决无法跳转创建文件夹会发生550命令未执行的问题
     public static synchronized boolean createDir(String s) throws Exception {
         FTPClient client = new FTPClient();
         try {

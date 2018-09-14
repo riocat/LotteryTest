@@ -34,7 +34,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="LotteryTest" target="1.8" />
-      <module name="smvcMybatis" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

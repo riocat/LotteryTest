@@ -1,5 +1,6 @@
 package com.yang.lotterytest.Controller;
 
+import com.yang.lotterytest.util.JsonResultStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,16 +28,16 @@ public class LoginController {
 	public JsonResult login(@RequestBody UserCondition condition, Model model, HttpSession session) {
 		User user = userService.getUserByName(condition.getName());
 		if (user == null) {
-			return new JsonResult(JsonResult.FAIL, null, "用户名不存在");
+			return new JsonResult(JsonResultStatus.fail, null, "用户名不存在");
 		} else if (!user.getPassword().equals(condition.getPassword())) {
-			return new JsonResult(JsonResult.FAIL, null, "密码错误");
+			return new JsonResult(JsonResultStatus.fail, null, "密码错误");
 		}
 		model.addAttribute("user", user);
 
 		// 2017.5.4 jboss session问题尝试失败
 //		session.setAttribute("user", user);
 
-		return new JsonResult(JsonResult.SUCCESS, null, null);
+		return new JsonResult(JsonResultStatus.success, null, null);
 	}
 	
 //	@RequestMapping(value = "/loginTest")

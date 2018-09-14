@@ -54,11 +54,36 @@
 			<param-name>includePathPatterns</param-name>
 			<param-value>/logined/.*</param-value>
 		</init-param>
+		<init-param>
+			<param-name>isSkip</param-name>
+			<param-value>false</param-value>
+		</init-param>
 	</filter>
+
+
+	<filter>
+		<display-name>SSOCheckFilter</display-name>
+		<filter-name>SSOCheckFilter</filter-name>
+		<filter-class>com.yang.lotterytest.filter.SSOCheckFilter</filter-class>
+		<init-param>
+			<param-name>includePathPatterns</param-name>
+			<param-value>/logined/.*</param-value>
+		</init-param>
+	</filter>
+
+
+	<filter-mapping>
+		<filter-name>SSOCheckFilter</filter-name>
+		<!-- 第一种 -->
+		<!-- 		<url-pattern>/logined/*</url-pattern> -->
+		<!-- 第二种 -->
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 	<filter-mapping>
 		<filter-name>SessionCheckFilter</filter-name>
 		<!-- 第一种 -->
-<!-- 		<url-pattern>/logined/*</url-pattern> -->
+		<!-- 		<url-pattern>/logined/*</url-pattern> -->
 		<!-- 第二种 -->
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>

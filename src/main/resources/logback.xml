@@ -11,7 +11,7 @@
 
 	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>/home/springMVCSessionTemplate/logs/smvc.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<fileNamePattern>/log/lotteryTest/lotteryTest.%d{yyyy-MM-dd}.log</fileNamePattern>
 			<maxHistory>30</maxHistory>
 		</rollingPolicy>
 		<encoder>
@@ -20,8 +20,10 @@
 		</encoder>
 	</appender>
 
-	<logger name="smvcMybatis" level="debug"></logger>
-	<logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="debug"></logger>
+	<!--additivity logger的上级logger(这里是root，级别和包路径相关)是否在输出一遍log  mybatis的sql等输出属于debug级别-->
+	<logger name="com.yang.lotterytest.Dao" level="debug" additivity="flase"></logger>
+
+	<logger name="com.yang.lotterytest.Controller" level="debug" additivity="flase"></logger>
 
 	<root level="info">
 		<appender-ref ref="stdout" />

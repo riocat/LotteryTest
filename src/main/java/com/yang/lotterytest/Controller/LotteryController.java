@@ -1,5 +1,6 @@
 package com.yang.lotterytest.Controller;
 
+import com.yang.lotterytest.util.JsonResultStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,6 @@ public class LotteryController {
 	@RequestMapping("lottery/showLotterys")
 	@ResponseBody
 	public JsonResult showLotterys() {
-		return new JsonResult(JsonResult.SUCCESS, lotteryService.showLotterys(), null);
+		return new JsonResult(JsonResultStatus.success, lotteryService.showLotterys(), null);
 	}
 }

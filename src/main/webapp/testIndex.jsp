@@ -83,6 +83,17 @@
                 <a href="login.jsp">login.jsp</a>
             </div>
         </div>
+        <div class="contentdiv">
+            <div class="tablediv">
+                <a href="SSOlogin.jsp">SSOlogin.jsp</a>
+            </div>
+        </div>
+
+        <div class="contentdiv">
+            <div class="tablediv">
+                <a href="/logined/user/main">logined</a>
+            </div>
+        </div>
     </div>
 </div>
 
