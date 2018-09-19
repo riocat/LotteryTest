@@ -32,21 +32,24 @@ public class SSOLoginController {
     @Autowired
     private JedisPool jedisPool;
 
+    // 一天后过期
+    private static final int expiredTime = 60 * 60 * 24;
+
     private ObjectMapper om = new ObjectMapper();
 
-    @RequestMapping(value ="/SSO/SSORegister")
+    @RequestMapping(value = "/SSO/SSORegister")
     public JsonResult registerMothed(HttpServletRequest request) {
         JsonResult jr = new JsonResult();
 
         return jr;
     }
 
-    @RequestMapping(value ="/SSO/SSOLogin")
+    @RequestMapping(value = "/SSO/SSOLogin")
     public String SSOLoginMothed(HttpServletRequest request, HttpServletResponse response) throws JsonProcessingException {
 
         Logger logger = LoggerFactory.getLogger(SSOLoginController.class);
 
-        try{
+        try {
             User user = userService.getUserByName(request.getParameter("username"));
 
             if (!user.getPassword().equals(request.getParameter("password"))) {
@@ -63,15 +66,16 @@ public class SSOLoginController {
             Jedis jedis = jedisPool.getResource();
             String userStr = om.writeValueAsString(user);
             jedis.set(sessionID, userStr);
+            jedis.expire(sessionID, expiredTime);
             logger.info("userStr :" + userStr);
 
             // 设置单点登录使用的token
             Cookie cookie = new Cookie(StaticFinalValue.SSO_TOKEN, sessionID);
             cookie.setPath("/");
             response.addCookie(cookie);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            logger.error(e.toString(),e);
+            logger.error(e.toString(), e);
             throw e;
         }
 
