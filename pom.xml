@@ -7,6 +7,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>smvcMybatis Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
+	<properties>
+		<!--<springVersion>4.1.6.RELEASE</springVersion>-->
+		<springVersion>4.3.18.RELEASE</springVersion>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -54,22 +60,22 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>4.1.6.RELEASE</version>
+			<version>${springVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>4.1.6.RELEASE</version>
+			<version>${springVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>4.1.6.RELEASE</version>
+			<version>${springVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>4.1.6.RELEASE</version>
+			<version>${springVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -158,11 +164,20 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.0.1</version>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.2.1</version>
+		</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.6</version>
 		</dependency>
+
+
 		<dependency>
 			<groupId>net.sf.jxls</groupId>
 			<artifactId>jxls-core</artifactId>
@@ -181,6 +196,21 @@
 			<artifactId>jedis</artifactId>
 			<version>2.9.0</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>2.0.9.RELEASE</version>
+		</dependency>
+
 
 	</dependencies>
 
