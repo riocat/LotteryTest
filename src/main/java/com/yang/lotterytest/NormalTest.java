@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.io.output.StringBuilderWriter;
 import org.apache.commons.lang.StringUtils;
 
 public class NormalTest {
@@ -34,7 +35,7 @@ public class NormalTest {
         // }
 
 		/*
-		 * List<String> list = new ArrayList<>(); list.add("C201709300007");
+         * List<String> list = new ArrayList<>(); list.add("C201709300007");
 		 * list.add("CS201710090007");
 		 */
 
@@ -180,7 +181,19 @@ public class NormalTest {
 //			System.out.println(longA[i]);
         }
 
-        System.out.println(getUnsignedLong(longA).toString());
+        BigDecimal targetValue = getUnsignedLong(longA);
+
+//        System.out.println(targetValue.toString());
+
+        System.out.println(getBinaryString(targetValue, new StringBuilder()));
+        System.out.println(getBinaryString(targetValue.add(new BigDecimal(7381377326613183173L)), new StringBuilder()));
+
+        System.out.println(getBinaryString(new BigDecimal(13), new StringBuilder()));
+        System.out.println(getBinaryString(new BigDecimal(0), new StringBuilder()));
+        System.out.println(getBinaryString(new BigDecimal(1), new StringBuilder()));
+        System.out.println(getBinaryString(new BigDecimal(2), new StringBuilder()));
+        System.out.println(getBinaryString(new BigDecimal(8), new StringBuilder()));
+        System.out.println(getBinaryString(new BigDecimal(37), new StringBuilder()));
     }
 
     public static String getByteStr(byte[] bytes) {
@@ -250,8 +263,32 @@ public class NormalTest {
         // 相加超出int范围 变为 0 ???
         long addtest = (longA[3] & 0xFFL) << 32 + (longA[4] & 0xFFL) << 24 + (longA[5] & 0xFFL) << 16 + (longA[6] & 0xFFL) << 8 + (longA[7] & 0xFFL) << 0;
 
-        System.out.println(Long.toBinaryString(endLong));
-        System.out.println(endLong);
-        return bigVlaue;
+//        System.out.println(Long.toBinaryString(endLong));
+//        System.out.println(endLong);
+
+        BigDecimal targetValue = bigVlaue.add(new BigDecimal(smallValue));
+
+//        System.out.println(targetValue.toEngineeringString());
+//        System.out.println(targetValue.toPlainString());
+
+        return targetValue;
+    }
+
+    /**
+     * 计算任意大无符号正整数的二进制原码
+     * @param targetValue
+     * @param stringBuilder
+     * @return
+     */
+    public static StringBuilder getBinaryString(BigDecimal targetValue, StringBuilder stringBuilder){
+        BigDecimal[] results = targetValue.divideAndRemainder(new BigDecimal(2));
+        if (results[0].compareTo(new BigDecimal(1)) >= 0) {
+            getBinaryString(results[0], stringBuilder);
+            stringBuilder.append(results[1]);
+        } else {
+            stringBuilder.append(results[1]);
+        }
+
+        return stringBuilder;
     }
 }
