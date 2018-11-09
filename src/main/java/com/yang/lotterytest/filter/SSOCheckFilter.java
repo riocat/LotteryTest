@@ -6,6 +6,7 @@ import com.yang.lotterytest.util.StaticFinalValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import redis.clients.jedis.Jedis;
@@ -43,7 +44,7 @@ public class SSOCheckFilter implements Filter {
         Logger logger = LoggerFactory.getLogger(SessionCheckFilter.class);
         logger.info("SSOCheckFilter working");
 
-        try{
+        try {
             HttpServletRequest hsr = (HttpServletRequest) request;
             String servletPath = hsr.getServletPath();
             for (String loginPath : loginPaths) {
@@ -64,7 +65,7 @@ public class SSOCheckFilter implements Filter {
                         if (cookies.size() == 1) {
                             String token = cookies.get(0).getValue();
 
-                            if(this.jedisPool == null){
+                            if (this.jedisPool == null) {
                                 WebApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(hsr.getServletContext());
                                 this.jedisPool = (JedisPool) ctx.getBean("jedisPool");
                             }
@@ -74,16 +75,17 @@ public class SSOCheckFilter implements Filter {
 
                             logger.info("SSOCheckFilter userStr :" + userStr);
 
-                            hsr.getSession().setAttribute("user", om.readValue(userStr, User.class));
+                            if (!StringUtils.isEmpty(userStr))
+                                hsr.getSession().setAttribute("user", om.readValue(userStr, User.class));
                         }
                     }
                 }
             }
 
             chain.doFilter(hsr, response);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            logger.error(e.toString(),e);
+            logger.error(e.toString(), e);
             throw e;
         }
 

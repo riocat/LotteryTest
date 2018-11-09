@@ -108,4 +108,6 @@
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 	<import resource="spring-redis.xml"></import>
+
+	<import resource="spring-mongodb.xml"></import>
 </beans>

@@ -71,9 +71,23 @@
 		</init-param>
 	</filter>
 
+	<filter>
+		<display-name>AccessRecordFilter</display-name>
+		<filter-name>AccessRecordFilter</filter-name>
+		<filter-class>com.yang.lotterytest.filter.AccessRecordFilter</filter-class>
+	</filter>
+
 
 	<filter-mapping>
 		<filter-name>SSOCheckFilter</filter-name>
+		<!-- 第一种 -->
+		<!-- 		<url-pattern>/logined/*</url-pattern> -->
+		<!-- 第二种 -->
+
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>SessionCheckFilter</filter-name>
 		<!-- 第一种 -->
 		<!-- 		<url-pattern>/logined/*</url-pattern> -->
 		<!-- 第二种 -->
@@ -81,10 +95,7 @@
 	</filter-mapping>
 
 	<filter-mapping>
-		<filter-name>SessionCheckFilter</filter-name>
-		<!-- 第一种 -->
-		<!-- 		<url-pattern>/logined/*</url-pattern> -->
-		<!-- 第二种 -->
+		<filter-name>AccessRecordFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 </web-app>
