@@ -63,7 +63,7 @@ public class NormalTest {
 		 */
 
 		/*
-		 * SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); Date date
+         * SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); Date date
 		 * = null; try { date = sdf.parse("2011-11-11"); } catch (ParseException
 		 * e) {
 		 *
@@ -77,27 +77,27 @@ public class NormalTest {
 		 */
 
 		/*
-		 * String outTradeNo = "G" + System.currentTimeMillis() + (long)
+         * String outTradeNo = "G" + System.currentTimeMillis() + (long)
 		 * (Math.random() * 10000000L);
 		 *
 		 * System.out.println(outTradeNo);
 		 */
 
 		/*
-		 * BigDecimal bi = new BigDecimal(12.345); bi = bi.setScale(2,
+         * BigDecimal bi = new BigDecimal(12.345); bi = bi.setScale(2,
 		 * BigDecimal.ROUND_HALF_UP); System.out.println(bi.toString());
 		 *
 		 * bi.longValue();
 		 */
 
 		/*
-		 * Map map = new HashMap<>();
+         * Map map = new HashMap<>();
 		 *
 		 * System.out.println("4".equals(map.get("SourceCode")));
 		 */
 
 		/*
-		 * HashMap map = new HashMap<String,Object>();
+         * HashMap map = new HashMap<String,Object>();
 		 *
 		 * map.put("a", null);
 		 *
@@ -109,13 +109,13 @@ public class NormalTest {
 		 */
 
 		/*
-		 * SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MMdd日 HH时");
+         * SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MMdd日 HH时");
 		 *
 		 * System.out.println(sdf.format(new Date()));
 		 */
 
 		/*
-		 * List<String> str = new ArrayList<String>(); str.get(0);
+         * List<String> str = new ArrayList<String>(); str.get(0);
 		 */
 
         // System.out.println(testClassAdd());
@@ -217,10 +217,16 @@ public class NormalTest {
         String[] sar = "20180508150147700".split(",");
         System.out.println(Arrays.toString(sar));*/
 
-        String hexStr = "0x540x680x000x000x130x140x070x410x620x000x020x110x180x180x100x220x030x420x160x250x720x910x100x010x320x560x100x460x460x510x000x000x000x000x000x000x000x000x0d0x0a";
+/*        String hexStr = "0x540x680x000x000x130x140x070x410x620x000x020x110x180x180x100x220x030x420x160x250x720x910x100x010x320x560x100x460x460x510x000x000x000x000x000x000x000x000x0d0x0a";
         System.out.println(hexStr);
-        getHexStrFromByteArray(getByteArrayFromHexStr(hexStr));
+        getHexStrFromByteArray(getByteArrayFromHexStr(hexStr));*/
 
+        System.out.println(Integer.toHexString(288));
+        System.out.println(getByteUnitHexStrFromNumber("288"));
+        System.out.println(getByteUnitHexStrFromNumber("255"));
+        System.out.println(getByteUnitHexStrFromNumber("1"));
+        System.out.println(getByteUnitHexStrFromNumber("13"));
+        System.out.println(getByteUnitHexStrFromNumber("359"));
     }
 
     public static String getByteStr(byte[] bytes) {
@@ -359,5 +365,26 @@ public class NormalTest {
         }
 //        System.out.println(tempSB.toString());
         return target;
+    }
+
+    public static String getByteUnitHexStrFromNumber(String sourceStr) {
+        ;
+        String sourHex = Integer.toHexString(new Integer(sourceStr));
+        System.out.println(sourHex);
+        boolean oddFlag = sourHex.length() % 2 == 0 ? false : true;
+        StringBuilder sourSB = new StringBuilder();
+        if (oddFlag) {
+            sourSB.append("0x0").append(sourHex.charAt(0));
+            for (int i = 1; i < sourHex.length(); ) {
+                sourSB.append("0x").append(sourHex.charAt(i++)).append(sourHex.charAt(i++));
+            }
+        } else {
+            for (int i = 0; i < sourHex.length() - 1; ) {
+                sourSB.append("0x").append(sourHex.charAt(i++)).append(sourHex.charAt(i++));
+            }
+        }
+
+
+        return sourSB.toString();
     }
 }
