@@ -41,14 +41,14 @@ public class NormalTest {
 
         // String str1 = "C201709300007";
         // String str1 = "201709300007";
-		/*
-		 * String str1 = "C"; String pattern = "(\\D*)(\\d+)"; Pattern r =
+        /*
+         * String str1 = "C"; String pattern = "(\\D*)(\\d+)"; Pattern r =
 		 * Pattern.compile(pattern); Matcher m = r.matcher(str1); if (m.find())
 		 * { String result = m.group(2); System.out.println(result); }
 		 */
 
 		/*
-		 * try { throw new Exception(); } catch (Exception e) { StringWriter sw
+         * try { throw new Exception(); } catch (Exception e) { StringWriter sw
 		 * = null; PrintWriter pw = null; try { // 记录失败信息 sw = new
 		 * StringWriter(); pw = new PrintWriter(sw, true);
 		 * e.printStackTrace(pw); String stacktrac = sw.getBuffer().toString();
@@ -57,7 +57,7 @@ public class NormalTest {
 		 */
 
 		/*
-		 * String a = ""; String[] as = a.split(",");
+         * String a = ""; String[] as = a.split(",");
 		 *
 		 * for (String s : as) { System.out.println(1); }
 		 */
@@ -168,7 +168,16 @@ public class NormalTest {
 		 * System.out.println(getByteStr(newStr.getBytes()));
 		 */
 
-        intTest(0);
+/*//    double[] tempLocation =new double[]{-1000.0,-1000.0};
+
+        double[] tempLocation = null;
+
+        if (tempLocation == null)
+        {
+            System.out.println(666666666);
+        }*/
+
+        /*intTest(0);
 
         // double lld = Double.valueOf("2f");
         // System.out.println(lld);
@@ -194,6 +203,24 @@ public class NormalTest {
         System.out.println(getBinaryString(new BigDecimal(2), new StringBuilder()));
         System.out.println(getBinaryString(new BigDecimal(8), new StringBuilder()));
         System.out.println(getBinaryString(new BigDecimal(37), new StringBuilder()));
+
+        Byte a = (byte)0xff;
+
+        System.out.println(a);*/
+
+
+/*        System.out.println(getBinaryString("A"));
+
+        char c = '$';
+        System.out.println(Integer.toBinaryString(c & 0xff));
+
+        String[] sar = "20180508150147700".split(",");
+        System.out.println(Arrays.toString(sar));*/
+
+        String hexStr = "0x540x680x000x000x130x140x070x410x620x000x020x110x180x180x100x220x030x420x160x250x720x910x100x010x320x560x100x460x460x510x000x000x000x000x000x000x000x000x0d0x0a";
+        System.out.println(hexStr);
+        getHexStrFromByteArray(getByteArrayFromHexStr(hexStr));
+
     }
 
     public static String getByteStr(byte[] bytes) {
@@ -276,11 +303,12 @@ public class NormalTest {
 
     /**
      * 计算任意大无符号正整数的二进制原码
+     *
      * @param targetValue
      * @param stringBuilder
      * @return
      */
-    public static StringBuilder getBinaryString(BigDecimal targetValue, StringBuilder stringBuilder){
+    public static StringBuilder getBinaryString(BigDecimal targetValue, StringBuilder stringBuilder) {
         BigDecimal[] results = targetValue.divideAndRemainder(new BigDecimal(2));
         if (results[0].compareTo(new BigDecimal(1)) >= 0) {
             getBinaryString(results[0], stringBuilder);
@@ -290,5 +318,46 @@ public class NormalTest {
         }
 
         return stringBuilder;
+    }
+
+    public static String getBinaryString(String target) {
+        if (target != null) {
+            byte[] b = target.getBytes();
+            StringBuilder sb = new StringBuilder();
+            for (byte by : b) {
+                sb.append(Integer.toBinaryString(by));
+            }
+            return sb.toString();
+        }
+        return null;
+    }
+
+    public static String getHexStrFromByteArray(byte[] ba) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : ba) {
+            sb.append("0x");
+            String temp = Integer.toHexString(b & 0xFF);
+            if (temp.length() < 2) {
+                sb.append("0");
+            }
+            sb.append(temp);
+        }
+        System.out.println(sb.toString());
+        return sb.toString();
+    }
+
+    public static byte[] getByteArrayFromHexStr(String hexStr) {
+        StringBuilder tempSB = new StringBuilder();
+        char[] ca = hexStr.toUpperCase().toCharArray();
+        byte[] target = new byte[hexStr.length() / 4];
+        String utilStr = "0123456789ABCDEF";
+        for (int i = 0; i < ca.length; ) {
+            byte tb = (byte) ((utilStr.indexOf(ca[i + 2]) << 4) | utilStr.indexOf(ca[i + 3]));
+            target[i / 4] = tb;
+            tempSB.append(tb);
+            i = i + 4;
+        }
+//        System.out.println(tempSB.toString());
+        return target;
     }
 }
