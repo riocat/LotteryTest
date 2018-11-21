@@ -121,13 +121,13 @@ public class NormalTest {
         // System.out.println(testClassAdd());
 
 		/*
-		 * for (int i = 0; i < 10; i++) { int j = ++i; System.out.println(j); }
+         * for (int i = 0; i < 10; i++) { int j = ++i; System.out.println(j); }
 		 *
 		 * for (int i = 0; i < 10; i++) { int j = ++i; System.out.println(j); }
 		 */
 
 		/*
-		 * BufferedReader br = new BufferedReader(new
+         * BufferedReader br = new BufferedReader(new
 		 * InputStreamReader(System.in)); System.out.println("输入字符, 按下 'q' 键退出。"
 		 * ); char c;
 		 *
@@ -135,7 +135,7 @@ public class NormalTest {
 		 */
 
 		/*
-		 * int[] te = { 1, 45 };
+         * int[] te = { 1, 45 };
 		 *
 		 * try { System.out.println(te[5]); } catch
 		 * (ArrayIndexOutOfBoundsException e) { // TODO Auto-generated catch
@@ -144,7 +144,7 @@ public class NormalTest {
 		 */
 
 		/*
-		 * Integer year = 2019;
+         * Integer year = 2019;
 		 *
 		 * byte byear = (byte) 0x07d9;
 		 *
@@ -152,7 +152,7 @@ public class NormalTest {
 		 */
 
 		/*
-		 * System.out.println(testReverse("000000064613968668"));
+         * System.out.println(testReverse("000000064613968668"));
 		 *
 		 * System.out.println(testReverse("64613968668"));
 		 *
@@ -160,7 +160,7 @@ public class NormalTest {
 		 */
 
 		/*
-		 * String carName = "津C5"; System.out.println(carName);
+         * String carName = "津C5"; System.out.println(carName);
 		 * System.out.println(Arrays.toString(carName.getBytes()));
 		 * System.out.println(getByteStr(carName.getBytes())); String newStr =
 		 * new String(carName.getBytes(), "GB2312"); System.out.println(newStr);
@@ -217,16 +217,18 @@ public class NormalTest {
         String[] sar = "20180508150147700".split(",");
         System.out.println(Arrays.toString(sar));*/
 
-/*        String hexStr = "0x540x680x000x000x130x140x070x410x620x000x020x110x180x180x100x220x030x420x160x250x720x910x100x010x320x560x100x460x460x510x000x000x000x000x000x000x000x000x0d0x0a";
+        String hexStr = "0x540x680x000x000x130x140x070x410x620x000x020x110x180x180x100x220x030x420x160x250x720x910x100x010x320x560x100x460x460x510x000x000x000x000x000x000x000x000x0d0x0a";
         System.out.println(hexStr);
-        getHexStrFromByteArray(getByteArrayFromHexStr(hexStr));*/
+        getHexStrFromByteArray(getByteArrayFromHexStr(hexStr));
 
         System.out.println(Integer.toHexString(288));
         System.out.println(getByteUnitHexStrFromNumber("288"));
         System.out.println(getByteUnitHexStrFromNumber("255"));
+        System.out.println(getByteUnitHexStrFromNumber("165"));
         System.out.println(getByteUnitHexStrFromNumber("1"));
         System.out.println(getByteUnitHexStrFromNumber("13"));
         System.out.println(getByteUnitHexStrFromNumber("359"));
+        System.out.println(getByteUnitHexStrFromNumber("3359"));
     }
 
     public static String getByteStr(byte[] bytes) {
@@ -357,7 +359,7 @@ public class NormalTest {
         char[] ca = hexStr.toUpperCase().toCharArray();
         byte[] target = new byte[hexStr.length() / 4];
         String utilStr = "0123456789ABCDEF";
-        for (int i = 0; i < ca.length; ) {
+        for (int i = 0; i < ca.length - 1; ) {
             byte tb = (byte) ((utilStr.indexOf(ca[i + 2]) << 4) | utilStr.indexOf(ca[i + 3]));
             target[i / 4] = tb;
             tempSB.append(tb);
@@ -368,14 +370,13 @@ public class NormalTest {
     }
 
     public static String getByteUnitHexStrFromNumber(String sourceStr) {
-        ;
         String sourHex = Integer.toHexString(new Integer(sourceStr));
         System.out.println(sourHex);
         boolean oddFlag = sourHex.length() % 2 == 0 ? false : true;
         StringBuilder sourSB = new StringBuilder();
         if (oddFlag) {
             sourSB.append("0x0").append(sourHex.charAt(0));
-            for (int i = 1; i < sourHex.length(); ) {
+            for (int i = 1; i < sourHex.length() - 1; ) {
                 sourSB.append("0x").append(sourHex.charAt(i++)).append(sourHex.charAt(i++));
             }
         } else {
@@ -383,8 +384,6 @@ public class NormalTest {
                 sourSB.append("0x").append(sourHex.charAt(i++)).append(sourHex.charAt(i++));
             }
         }
-
-
         return sourSB.toString();
     }
 }
