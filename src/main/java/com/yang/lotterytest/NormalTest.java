@@ -340,6 +340,12 @@ public class NormalTest {
         return null;
     }
 
+    /**
+     * 将byte[]数组转化为0xXX格式的16进制字符串
+     *
+     * @param ba
+     * @return
+     */
     public static String getHexStrFromByteArray(byte[] ba) {
         StringBuilder sb = new StringBuilder();
         for (byte b : ba) {
@@ -354,6 +360,12 @@ public class NormalTest {
         return sb.toString();
     }
 
+    /**
+     * 将0xXX格式的16进制数据组成的字符串（即一个byte拆成两个0xXX格式字符串，低或高四位的值如果小于16则在高位补0）转化为byte[]
+     *
+     * @param hexStr
+     * @return
+     */
     public static byte[] getByteArrayFromHexStr(String hexStr) {
         StringBuilder tempSB = new StringBuilder();
         char[] ca = hexStr.toUpperCase().toCharArray();
@@ -369,6 +381,12 @@ public class NormalTest {
         return target;
     }
 
+    /**
+     * 将int值转换为0xXX格式的16进制数据组成的字符串（对Integer.toHexString的结果进行处理 达到以下效果:120-> 0x010x20,ff->0xff,1->0x01,d1f->0x0d0x1f）
+     *
+     * @param sourceStr
+     * @return
+     */
     public static String getByteUnitHexStrFromNumber(String sourceStr) {
         String sourHex = Integer.toHexString(new Integer(sourceStr));
         System.out.println(sourHex);
