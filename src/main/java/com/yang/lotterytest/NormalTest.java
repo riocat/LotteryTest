@@ -277,6 +277,11 @@ public class NormalTest {
         System.out.println(a);
     }
 
+    /**
+     * 获得64位无符号整数值
+     * @param longA
+     * @return
+     */
     public static BigDecimal getUnsignedLong(byte[] longA) {
         byte highestBits = longA[0];
         long temp = (highestBits & 0xFFL) << 48;
